@@ -103,3 +103,58 @@ startExample("Merge") {
     }
 }
 
+// SUBJECT
+
+startExample("PublishSubject") {
+    let disposeBag = DisposeBag()
+    
+    let subject = PublishSubject<String>()
+    subject.subscribe {
+        print("First subscriber:", $0)
+    }.disposed(by: disposeBag)
+    
+    subject.on(.next("Hello"))
+    //subject.onCompleted()
+    subject.onNext("RxSwif")
+    
+    subject.subscribe {
+        print("Second subscriber:",  $0)
+    }.disposed(by: disposeBag)
+    
+    subject.onNext("How are you?")
+}
+
+startExample("BehaviorSubject") {
+    let disposeBag = DisposeBag()
+    let subject = BehaviorSubject(value: 1) // [1]
+    
+    subject.subscribe {
+        print( #line, $0)
+    }.disposed(by: disposeBag)
+    
+    subject.onNext(2) // [1, 2]
+    subject.onNext(3) // [1,2,3]
+    
+    subject.map{ $0 + 2 }.subscribe {
+        print( #line, $0) // [3]
+    }.disposed(by: disposeBag)
+}
+
+startExample("ReplaySubject") {
+    let disposeBag = DisposeBag()
+    let subject = ReplaySubject<String>.create(bufferSize: 2)
+    
+    subject.subscribe {
+        print("First subcription", $0)
+    }.disposed(by: disposeBag)
+    
+    subject.onNext("A")
+    subject.onNext("B")
+    
+    subject.subscribe {
+        print("Second subcription", $0)
+    }.disposed(by: disposeBag)
+    
+    subject.onNext("C")
+    subject.onNext("D")
+}
