@@ -103,7 +103,7 @@ startExample("Merge") {
     }
 }
 
-// SUBJECT
+//MARK: - SUBJECT
 
 startExample("PublishSubject") {
     let disposeBag = DisposeBag()
@@ -157,4 +157,20 @@ startExample("ReplaySubject") {
     
     subject.onNext("C")
     subject.onNext("D")
+}
+
+//MARK: - Side Effect
+
+startExample("Side Effect") {
+    let disposeBag = DisposeBag()
+    let observable = Observable.from([0, 32, 300, -40])
+    
+    observable.do {
+        print("\($0)F = ", terminator: "")
+    }.map {
+        Double($0 - 32) * 5/9.0
+    }.subscribe {
+        print(String(format: "%.1f", $0))
+    }.disposed(by: disposeBag)
+    
 }
