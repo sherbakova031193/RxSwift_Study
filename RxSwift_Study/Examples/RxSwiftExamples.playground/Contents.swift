@@ -104,7 +104,6 @@ startExample("Merge") {
 }
 
 //MARK: - SUBJECT
-
 startExample("PublishSubject") {
     let disposeBag = DisposeBag()
     
@@ -160,7 +159,6 @@ startExample("ReplaySubject") {
 }
 
 //MARK: - Side Effect
-
 startExample("Side Effect") {
     let disposeBag = DisposeBag()
     let observable = Observable.from([0, 32, 300, -40])
@@ -172,5 +170,51 @@ startExample("Side Effect") {
     }.subscribe {
         print(String(format: "%.1f", $0))
     }.disposed(by: disposeBag)
-    
+}
+
+//MARK: - Schedulers
+startExample("Without observeOn") {
+    let disposeBag = DisposeBag()
+    Observable.of(1,2,3)
+        .subscribe {
+            print(Thread.current, $0)
+        } onError: { (error) in
+            print("error")
+        } onCompleted: {
+            print("onCompleted")
+        } onDisposed: {
+            print("onDisposed")
+        }.disposed(by: disposeBag)
+
+}
+
+startExample("observeOn") {
+    let disposeBag = DisposeBag()
+    Observable.of(12,3,456)
+        .observe(on: ConcurrentDispatchQueueScheduler(qos: .background))
+        .subscribe {
+            print(Thread.current, $0)
+        } onError: { (error) in
+            print("error")
+        } onCompleted: {
+            print("onCompleted")
+        } onDisposed: {
+            print("onDisposed")
+        }.disposed(by: disposeBag)
+}
+
+startExample("subscribeOn and observeOn") {
+    print("Init",Thread.current)
+    Observable<Int>.create { (observer) -> Disposable in
+        print("Observable thread:", Thread.current)
+        observer.onNext(1)
+        observer.onNext(2)
+        observer.onNext(3)
+        return Disposables.create()
+    }
+    .subscribe(on: SerialDispatchQueueScheduler.init(qos: .background))
+    .observe(on: MainScheduler.instance)
+    .subscribe {
+        print(print("subscribe thread:", Thread.current, $0))
+    }
 }
