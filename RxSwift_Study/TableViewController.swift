@@ -8,49 +8,34 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import RxDataSources
 
 class TableViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    let foods = Observable.just([
-        Food(name: "Колбаски", flickrID: "1"),
-        Food(name: "Блинчики", flickrID: "2"),
-        Food(name: "Суши", flickrID: "3"),
-        Food(name: "Пицца", flickrID: "4"),
-        Food(name: "Гамбургеры", flickrID: "5"),
-        Food(name: "Ягоды", flickrID: "6"),
-        Food(name: "Салат", flickrID: "7"),
-        Food(name: "Бекон", flickrID: "8"),
-        Food(name: "Нарезка", flickrID: "9"),
-        Food(name: "Зеленый салат", flickrID: "10"),
-        Food(name: "Греческий салат", flickrID: "11"),
-        Food(name: "Фастфуд", flickrID: "12"),
-        Food(name: "Фастфуд 2", flickrID: "13"),
-        Food(name: "Дисерт", flickrID: "14"),
-        Food(name: "Завтрак", flickrID: "15"),
-        Food(name: "Мюсли", flickrID: "16"),
-        Food(name: "Я не знаю что это", flickrID: "17"),
-        Food(name: "Виноград", flickrID: "18"),
-        Food(name: "Сыр", flickrID: "19"),
-        Food(name: "Еще блинчики", flickrID: "20"),
-    ])
+    let foodsData = SectionModelFood()
+    var dataSource: RxTableViewSectionedReloadDataSource<SectionModel<String, Food>>!
     
     let disposeDag = DisposeBag()
-    
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        foods.bind(to: tableView.rx.items(cellIdentifier: "Cell")) { row, food, cell in
-            cell.textLabel?.text = food.name
-            cell.detailTextLabel?.text = food.flickrID
-            cell.imageView?.image = food.image
-        }.disposed(by: disposeDag)
+        dataSource = RxTableViewSectionedReloadDataSource<SectionModel<String, Food>>(
+            configureCell: { dataSource, tableView, indexPath, food in
+                let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+                cell.textLabel?.text = food.name
+                cell.detailTextLabel?.text = food.flickrID
+                cell.imageView?.image = food.image
+                return cell
+            }, titleForHeaderInSection: { (dataSource, section) -> String? in
+                return dataSource.sectionModels[section].identity
+            })
 
-        tableView.rx.modelSelected(Food.self).subscribe {
-            print("You selected \($0)")
-        }.disposed(by: disposeDag)
+        foodsData.foods.bind(to: tableView.rx.items(dataSource: dataSource)).disposed(by: disposeDag)
+        
+        tableView.rx.setDelegate(self).disposed(by: disposeDag)
     }
 }
 
@@ -71,9 +56,13 @@ class TableViewController: UIViewController {
 //    }
 //}
 //
-//extension TableViewController: UITableViewDelegate {
-//
-//    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-//        print("Selected row \(indexPath.row)")
-//    }
-//}
+extension TableViewController: UITableViewDelegate {
+
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        print("Selected row \(indexPath.row)")
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return CGFloat(arc4random_uniform(64 + 32))
+    }
+}

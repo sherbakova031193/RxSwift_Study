@@ -14,6 +14,7 @@
 		573CC33325CEEB1900D73350 /* CollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 573CC33225CEEB1900D73350 /* CollectionReusableView.swift */; };
 		573CC34325CEF70700D73350 /* String + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 573CC34225CEF70700D73350 /* String + Extensions.swift */; };
 		573CC34825CEF71E00D73350 /* AnimatedSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 573CC34725CEF71E00D73350 /* AnimatedSectionModel.swift */; };
+		573CC35C25CF104500D73350 /* SectionModelFood.swift in Sources */ = {isa = PBXBuildFile; fileRef = 573CC35B25CF104500D73350 /* SectionModelFood.swift */; };
 		5770FAB125C58E8100678132 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5770FAB025C58E8100678132 /* AppDelegate.swift */; };
 		5770FAB325C58E8100678132 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5770FAB225C58E8100678132 /* SceneDelegate.swift */; };
 		5770FAB525C58E8100678132 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5770FAB425C58E8100678132 /* ViewController.swift */; };
@@ -55,6 +56,7 @@
 		573CC33225CEEB1900D73350 /* CollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionReusableView.swift; sourceTree = "<group>"; };
 		573CC34225CEF70700D73350 /* String + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String + Extensions.swift"; sourceTree = "<group>"; };
 		573CC34725CEF71E00D73350 /* AnimatedSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedSectionModel.swift; sourceTree = "<group>"; };
+		573CC35B25CF104500D73350 /* SectionModelFood.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionModelFood.swift; sourceTree = "<group>"; };
 		5770FAAD25C58E8100678132 /* RxSwift_Study.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RxSwift_Study.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5770FAB025C58E8100678132 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5770FAB225C58E8100678132 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 			children = (
 				573CC32525CEC8A800D73350 /* Food.swift */,
 				573CC34725CEF71E00D73350 /* AnimatedSectionModel.swift */,
+				573CC35B25CF104500D73350 /* SectionModelFood.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -192,11 +195,11 @@
 				5770FAB025C58E8100678132 /* AppDelegate.swift */,
 				5770FAB225C58E8100678132 /* SceneDelegate.swift */,
 				5770FAB425C58E8100678132 /* ViewController.swift */,
+				573CC31725CEC7C400D73350 /* TableViewController.swift */,
 				573CC31C25CEC7E300D73350 /* CollectionViewController.swift */,
 				573CC34C25CEF9DB00D73350 /* Extensions */,
 				573CC35425CEF9F000D73350 /* Header */,
 				573CC35025CEF9EA00D73350 /* Cell */,
-				573CC31725CEC7C400D73350 /* TableViewController.swift */,
 				5770FAB625C58E8100678132 /* Main.storyboard */,
 				5770FAB925C58E8200678132 /* Assets.xcassets */,
 				5770FABB25C58E8200678132 /* LaunchScreen.storyboard */,
@@ -473,6 +476,7 @@
 				573CC34325CEF70700D73350 /* String + Extensions.swift in Sources */,
 				573CC33325CEEB1900D73350 /* CollectionReusableView.swift in Sources */,
 				5770FAB125C58E8100678132 /* AppDelegate.swift in Sources */,
+				573CC35C25CF104500D73350 /* SectionModelFood.swift in Sources */,
 				573CC34825CEF71E00D73350 /* AnimatedSectionModel.swift in Sources */,
 				573CC31D25CEC7E300D73350 /* CollectionViewController.swift in Sources */,
 				573CC32E25CEEB0800D73350 /* CollectionViewCell.swift in Sources */,
