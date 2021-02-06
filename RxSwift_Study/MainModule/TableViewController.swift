@@ -61,8 +61,4 @@ extension TableViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         print("Selected row \(indexPath.row)")
     }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return CGFloat(arc4random_uniform(64 + 32))
-    }
 }
