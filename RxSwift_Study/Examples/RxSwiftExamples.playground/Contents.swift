@@ -1,5 +1,6 @@
 import UIKit
 import RxSwift
+import RxCocoa
 import PlaygroundSupport
 PlaygroundPage.current.needsIndefiniteExecution = true
 
@@ -217,4 +218,10 @@ startExample("subscribeOn and observeOn") {
     .subscribe {
         print(print("subscribe thread:", Thread.current, $0))
     }
+}
+
+//MARK: - Units
+
+startExample("Driver") {
+     
 }
